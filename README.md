@@ -17,7 +17,7 @@ Praktični dio sastoji se od zapisnika s intervjua, plana projekta, specifikacij
 
 ### Zadaci za praktični dio
 1. Isporučiti zapisnik s intervjua
-	* isporučuje se individualno (svatko u svoju privatnu mapu). Isporuka započinje prihvaćanjem zadatka na sljedećoj poveznici [bit će objavljeno naknadno] čime će se automatski stvoriti privatna mapa za isporuku sadržaja zadatka. 
+	* isporučuje se individualno (svatko u svoju privatnu mapu). Isporuka započinje prihvaćanjem zadatka na sljedećoj poveznici https://classroom.github.com/a/ckOmUo0l čime će se automatski stvoriti privatna mapa za isporuku sadržaja zadatka. 
 	* **Rok za predaju zapisnika je 16.4.2020. u 8:00**
 	* audio zapis intervjua nalazi se u internim materijalima
 	 

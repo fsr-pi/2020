@@ -25,10 +25,11 @@ Praktični dio sastoji se od zapisnika s intervjua, plana projekta, specifikacij
 3. Specifikacija zahtjeva - **Rok za predaju 4.5.2020. u 8:00**
 4. Model podataka - **Rok za predaju 4.5.2020. u 8:00**
 	* Plan projekta, specifikacija zahtjeva i konceptualni model isporučuju se u zajedničku mapu grupe.  
-	Mapa će stvoriti nakon što prva osoba iz grupe prihvati zadatak koji se nalazi na sljedećoj poveznici [bit će objavljeno naknadno]
-	te pritom stvori grupu s nazivom grupaX (X je broj grupe - **provjeriti broj grupe u interno-2020/bodovi.xlsx**). Ostali prihvaćaju zadatak na istoj poveznici, ali prilikom prihvaćanja umjesto unosa nove grupe odabiru postojeću grupu i pridružuju se.
+	Mapa će stvoriti nakon što prva osoba iz grupe prihvati zadatak koji se nalazi na sljedećoj poveznici https://classroom.github.com/g/sZCRF6SW
+	te pritom stvori grupu s nazivom grupaX (X je broj grupe - **provjeriti broj grupe u https://github.com/fsr-pi/interno-2020/blob/master/bodovi.xlsx**). Ostali prihvaćaju zadatak na istoj poveznici, ali prilikom prihvaćanja umjesto unosa nove grupe odabiru postojeću grupu i pridružuju se.
 	Isporučene dokumente možete mijenjati neograničen broj puta do krajnjeg roka. 
-	U sklopu izrade modela podataka, temeljem izrađenog konceptualnog modela treba realizirati fizički model te ga ugraditi na zajednički server i popuniti s nekoliko reprezentativnih podataka.
+	U sklopu izrade modela podataka, temeljem izrađenog konceptualnog modela treba realizirati fizički model te ga ugraditi na zajednički server i popuniti s nekoliko reprezentativnih podataka. 
+	Podaci za spajanje za zajednički SQL server bit će naknadno dodani u kreirani repozitorij.
 
 5. Web aplikacija 
 	* Isporučuju se u zajedničku mapu grupe. 

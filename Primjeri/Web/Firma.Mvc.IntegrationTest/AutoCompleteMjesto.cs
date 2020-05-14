@@ -1,11 +1,15 @@
 ﻿using Firma.Mvc.Controllers.AutoComplete;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Hosting;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -13,16 +17,15 @@ using Xunit;
 namespace Firma.Mvc.IntegrationTest
 {
   public class AutoCompleteMjesto
-  {
-    private readonly TestServer server;
+  {    
     private readonly HttpClient client;
     private const string addressPrefix = "AutoComplete/Mjesto?term=";
     public AutoCompleteMjesto()
     {
-      // Arrange
-      server = new TestServer(new WebHostBuilder()
-          .UseStartup<Startup>());
-      client = server.CreateClient();
+
+      // Arrange   
+      var factory = new WebApplicationFactory<Startup>();
+      client = factory.CreateClient();               
     }
 
     [Theory]
@@ -36,9 +39,8 @@ namespace Firma.Mvc.IntegrationTest
       var response = await client.GetAsync(addressPrefix + naziv);
       response.EnsureSuccessStatusCode();
 
-      var stream = await response.Content.ReadAsStreamAsync();     
-      var serializer = new DataContractJsonSerializer(typeof(IEnumerable<IdLabel>));
-      var gradovi = serializer.ReadObject(stream) as IEnumerable<IdLabel>;
+      var stream = await response.Content.ReadAsStreamAsync();
+      var gradovi = await JsonSerializer.DeserializeAsync<IEnumerable<IdLabel>>(stream);  
 
       Assert.NotEmpty(gradovi);
       Assert.Single(gradovi);
@@ -56,8 +58,7 @@ namespace Firma.Mvc.IntegrationTest
       response.EnsureSuccessStatusCode();
 
       var stream = await response.Content.ReadAsStreamAsync();
-      var serializer = new DataContractJsonSerializer(typeof(IEnumerable<IdLabel>));
-      var gradovi = serializer.ReadObject(stream) as IEnumerable<IdLabel>;
+      var gradovi = await JsonSerializer.DeserializeAsync<IEnumerable<IdLabel>>(stream);
 
       Assert.Empty(gradovi);      
     }
@@ -76,8 +77,7 @@ namespace Firma.Mvc.IntegrationTest
       response.EnsureSuccessStatusCode();
 
       var stream = await response.Content.ReadAsStreamAsync();
-      var serializer = new DataContractJsonSerializer(typeof(IEnumerable<IdLabel>));
-      var gradovi = serializer.ReadObject(stream) as IEnumerable<IdLabel>;
+      var gradovi = await JsonSerializer.DeserializeAsync<IEnumerable<IdLabel>>(stream);
 
       Assert.NotEmpty(gradovi);
       Assert.True(gradovi.Count() > 1);
@@ -85,7 +85,7 @@ namespace Firma.Mvc.IntegrationTest
       foreach (var grad in gradovi)
       {
         Assert.Contains(naziv, grad.Label, StringComparison.CurrentCultureIgnoreCase);
-        Assert.NotEqual(default(int), grad.Id);
+        Assert.NotEqual(default, grad.Id);
       }
     }
   }

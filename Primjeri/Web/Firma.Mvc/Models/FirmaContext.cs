@@ -26,30 +26,34 @@ namespace Firma.Mvc.Models
     {
       modelBuilder.Entity<ViewPartner>(entity =>
       {
-        entity.HasKey(e => e.IdPartnera);
+        entity.HasNoKey();
+        entity.ToView("vw_Partner");
       });
       modelBuilder.Entity<ViewDokumentInfo>(entity =>
       {
-        entity.HasKey(e => e.IdDokumenta);
+        entity.HasNoKey();
+        entity.ToView("vw_Dokumenti");
       });
       modelBuilder.Entity<StavkaDenorm>(entity =>
       {
-        entity.HasKey(e => e.IdStavke);
+        entity.HasNoKey();
       });
       modelBuilder.Entity<Artikl>(entity =>
       {
         entity.HasKey(e => e.SifArtikla)
-            .ForSqlServerIsClustered(false);
+              .HasName("pk_Artikl")
+              .IsClustered(false);
 
         entity.HasIndex(e => e.NazArtikla)
             .HasName("ix_Artikl_NazArtikla")
             .IsUnique();
 
-        entity.Property(e => e.SifArtikla).HasDefaultValueSql("((0))");
+        entity.Property(e => e.SifArtikla)
+              .HasComment("Šifra artikla")
+              .ValueGeneratedNever();
 
         entity.Property(e => e.CijArtikla)
-            .HasColumnType("money")
-            .HasDefaultValueSql("((0))");
+              .HasColumnType("money");
 
         entity.Property(e => e.JedMjere)
             .IsRequired()
@@ -60,27 +64,24 @@ namespace Firma.Mvc.Models
             .IsRequired()
             .HasMaxLength(255);
 
-        entity.Property(e => e.SlikaArtikla).HasColumnType("image");
-
         entity.Property(e => e.SlikaChecksum).HasComputedColumnSql("(checksum([SlikaArtikla]))");
       });
 
       modelBuilder.Entity<Dokument>(entity =>
       {
         entity.HasKey(e => e.IdDokumenta)
-            .ForSqlServerIsClustered(false);
+                    .HasName("pk_Dokument")
+                    .IsClustered(false);
 
-        entity.Property(e => e.BrDokumenta).HasDefaultValueSql("((0))");
+        entity.Property(e => e.BrDokumenta);
 
         entity.Property(e => e.DatDokumenta).HasColumnType("datetime");
 
         entity.Property(e => e.IznosDokumenta)
-            .HasColumnType("money")
-            .HasDefaultValueSql("((0))");
+            .HasColumnType("money");
 
         entity.Property(e => e.PostoPorez)
-            .HasColumnType("decimal(4, 2)")
-            .HasDefaultValueSql("((0))");
+            .HasColumnType("decimal(4, 2)");
 
         entity.Property(e => e.VrDokumenta)
             .IsRequired()
@@ -101,15 +102,14 @@ namespace Firma.Mvc.Models
       modelBuilder.Entity<Drzava>(entity =>
       {
         entity.HasKey(e => e.OznDrzave)
-            .ForSqlServerIsClustered(false);
+            .IsClustered(false);
 
         entity.HasIndex(e => e.NazDrzave)
             .HasName("ix_Drzava_NazDrzave")
             .IsUnique();
 
         entity.Property(e => e.OznDrzave)
-            .HasMaxLength(3)
-            .ValueGeneratedNever();
+              .HasMaxLength(3);
 
         entity.Property(e => e.Iso3drzave)
             .HasColumnName("ISO3Drzave")
@@ -125,7 +125,7 @@ namespace Firma.Mvc.Models
       modelBuilder.Entity<Mjesto>(entity =>
       {
         entity.HasKey(e => e.IdMjesta)
-            .ForSqlServerIsClustered(false);
+              .IsClustered(false);
 
         entity.HasIndex(e => e.NazMjesta)
             .HasName("ix_Mjesto_NazMjesta");
@@ -153,7 +153,7 @@ namespace Firma.Mvc.Models
       modelBuilder.Entity<Osoba>(entity =>
       {
         entity.HasKey(e => e.IdOsobe)
-            .ForSqlServerIsClustered(false);
+              .IsClustered(false);
 
         entity.Property(e => e.IdOsobe).ValueGeneratedNever();
 
@@ -174,7 +174,7 @@ namespace Firma.Mvc.Models
       modelBuilder.Entity<Partner>(entity =>
       {
         entity.HasKey(e => e.IdPartnera)
-            .ForSqlServerIsClustered(false);
+            .IsClustered(false);
 
         entity.HasIndex(e => e.Oib)
             .HasName("ix_Partner_OIB")
@@ -190,7 +190,8 @@ namespace Firma.Mvc.Models
 
         entity.Property(e => e.TipPartnera)
             .IsRequired()
-            .HasMaxLength(1);
+            .HasMaxLength(1)
+            .HasComment("Tip partnera (F-fizička, P-pravna)");
 
         entity.HasOne(d => d.IdMjestaIsporukeNavigation)
             .WithMany(p => p.PartnerIdMjestaIsporukeNavigation)
@@ -206,24 +207,22 @@ namespace Firma.Mvc.Models
       modelBuilder.Entity<Stavka>(entity =>
       {
         entity.HasKey(e => e.IdStavke)
-            .ForSqlServerIsClustered(false);
+            .IsClustered(false);
 
         entity.HasIndex(e => e.SifArtikla)
             .HasName("ix_Stavka_SifArtikla");
 
         entity.HasIndex(e => new { e.IdDokumenta, e.SifArtikla })
             .HasName("IX_Stavka_SifArtikla_IdDokumenta")
-            .IsUnique();       
+            .IsUnique();
 
         entity.Property(e => e.JedCijArtikla)
-            .HasColumnType("money")
-            .HasDefaultValueSql("((0))");
+            .HasColumnType("money");
 
         entity.Property(e => e.KolArtikla).HasColumnType("decimal(18, 5)");
 
         entity.Property(e => e.PostoRabat)
-            .HasColumnType("decimal(4, 2)")
-            .HasDefaultValueSql("((0))");
+            .HasColumnType("decimal(4, 2)");
 
         entity.Property(e => e.SifArtikla).HasDefaultValueSql("((0))");
 
@@ -242,7 +241,7 @@ namespace Firma.Mvc.Models
       modelBuilder.Entity<Tvrtka>(entity =>
       {
         entity.HasKey(e => e.IdTvrtke)
-            .ForSqlServerIsClustered(false);
+            .IsClustered(false);
 
         entity.HasIndex(e => e.MatBrTvrtke)
             .HasName("ix_Tvrtka_MatBrTvrtke")

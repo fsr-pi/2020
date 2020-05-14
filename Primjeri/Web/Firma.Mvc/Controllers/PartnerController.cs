@@ -25,11 +25,8 @@ namespace Firma.Mvc.Controllers
 
     public IActionResult Index(string filter, int page = 1, int sort = 1, bool ascending = true)
     {
-      int pagesize = appData.PageSize;
-      //var sql = "SELECT * FROM vw_partner"; //potreban ako se ne zove vw_Partner u FirmaContext
-      var query = ctx.vw_Partner
-                     .AsNoTracking();
-                      //.FromSql(sql);
+      int pagesize = appData.PageSize;      
+      var query = ctx.vw_Partner.AsQueryable();
 
 
       int count = query.Count();
@@ -102,8 +99,7 @@ namespace Firma.Mvc.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Create(PartnerViewModel model)
-    {
-      ValidateModel(model);
+    {      
       if (ModelState.IsValid)
       {
         Partner p = new Partner();
@@ -137,10 +133,7 @@ namespace Firma.Mvc.Controllers
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int IdPartnera, int page = 1, int sort = 1, bool ascending = true)
     {
-      var partner = await ctx.Partner
-                       .AsNoTracking()
-                       .Where(p => p.IdPartnera == IdPartnera)
-                       .SingleOrDefaultAsync();
+      var partner = await ctx.Partner.FindAsync(IdPartnera);
       if (partner != null)
       {
         try
@@ -224,8 +217,7 @@ namespace Firma.Mvc.Controllers
       if (partner == null)
       {
         return NotFound("Ne postoji partner s id-om: " + model.IdPartnera);
-      }
-      ValidateModel(model);
+      }      
 
       if (ModelState.IsValid)
       {
@@ -236,10 +228,12 @@ namespace Firma.Mvc.Controllers
           //vezani dio je stvoren s new Osoba() ili new Tvrtka() pa je entity stated Added što bi proizvelo Insert pa ne update
           if (partner.Osoba != null)
           {
+            partner.Osoba.IdOsobe = partner.IdPartnera;
             ctx.Entry(partner.Osoba).State = EntityState.Modified;
           }
           if (partner.Tvrtka != null)
           {
+            partner.Tvrtka.IdTvrtke = partner.IdPartnera;
             ctx.Entry(partner.Tvrtka).State = EntityState.Modified;
           }
 
@@ -315,32 +309,7 @@ namespace Firma.Mvc.Controllers
         throw;
       }
     }
-
-    private void ValidateModel(PartnerViewModel model)
-    {
-      if (model.TipPartnera == "O")
-      {
-        if (string.IsNullOrWhiteSpace(model.ImeOsobe))
-        {
-          ModelState.AddModelError(nameof(model.ImeOsobe), "Ime osoba ne smije biti prazno");
-        }
-        if (string.IsNullOrWhiteSpace(model.PrezimeOsobe))
-        {
-          ModelState.AddModelError(nameof(model.PrezimeOsobe), "Prezime osoba ne smije biti prazno");
-        }
-      }
-      else
-      {
-        if (string.IsNullOrWhiteSpace(model.MatBrTvrtke))
-        {
-          ModelState.AddModelError(nameof(model.MatBrTvrtke), "Matični broj tvrtke mora biti popunjen");
-        }
-        if (string.IsNullOrWhiteSpace(model.NazivTvrtke))
-        {
-          ModelState.AddModelError(nameof(model.PrezimeOsobe), "Naziv tvrtke mora biti popunjen");
-        }
-      }
-    }
+    
     #endregion
   }
 }

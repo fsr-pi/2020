@@ -12,11 +12,7 @@
 }
 
 .pagebox {
-    width: 40px;
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    cursor: pointer;
+    width: 45px;
 }
 
     .pagebox::selection {

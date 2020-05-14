@@ -1,7 +1,7 @@
 ﻿@model MjestaViewModel
 
 @{
-    ViewBag.Title += "Mjesta";
+    ViewBag.Title = "Mjesta";
 }
 
 <h2>Popis mjesta</h2>
@@ -22,7 +22,7 @@
                 for (int i = 1; i <= nazivi.Length; i++)
                 {
                     <th>
-                        <a asp-route-sort="@i" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == i ? Model.PagingInfo.Ascending? false : true : true)">
+                        <a asp-route-sort="@i" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
                             @nazivi[i - 1]
                         </a>
                     </th>

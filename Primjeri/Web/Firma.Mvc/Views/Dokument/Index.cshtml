@@ -1,7 +1,7 @@
 ﻿@model DokumentiViewModel
 
 @{
-    ViewBag.Title += "Države";
+    ViewBag.Title = "Države";
 }
 
 <div class="container">
@@ -26,22 +26,22 @@
     <thead>
         <tr>
             <th>
-                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? Model.PagingInfo.Ascending? false : true : true)" asp-route-filter="@Model.Filter">
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)" asp-route-filter="@Model.Filter">
                     Id dokumenta
                 </a>
             </th>
             <th>
-                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? Model.PagingInfo.Ascending? false : true : true)" asp-route-filter="@Model.Filter">
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)" asp-route-filter="@Model.Filter">
                     Partner
                 </a>
             </th>
             <th>
-                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)" asp-route-filter="@Model.Filter">
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)" asp-route-filter="@Model.Filter">
                     Datum dokumenta
                 </a>
             </th>
             <th>
-                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)" asp-route-filter="@Model.Filter">
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)" asp-route-filter="@Model.Filter">
                     Iznos dokumenta
                 </a>
             </th>

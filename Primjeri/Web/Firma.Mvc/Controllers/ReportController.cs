@@ -245,9 +245,8 @@ namespace Firma.Mvc.Controllers
       int n = 10;
       var param = new SqlParameter("N", n);
       string naslov = $"{n} najvećih kupnji";
-      var stavke = await ctx.StavkaDenorm
-                            .AsNoTracking()
-                            .FromSql("SELECT * FROM fn_NajveceKupnje(@N)", param)
+      var stavke = await ctx.StavkaDenorm                            
+                            .FromSqlRaw("SELECT * FROM fn_NajveceKupnje(@N)", param)
                             .OrderBy(s => s.IdDokumenta)
                             .ThenBy(s => s.NazArtikla)
                             .ToListAsync();

@@ -3,16 +3,13 @@
     {
       "src": [
         {
-          "files": ["*.csproj"],
-		   "cwd": "../Firma.Mvc",
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**",
-            "_site/**"
-          ]
+          "files": [ "*.csproj" ],
+          "src": "../Firma.Mvc"
         }
       ],
-      "dest": "api"
+      "dest": "api",
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
     }
   ],
   "build": {
@@ -29,10 +26,6 @@
           "articles/**/toc.yml",
           "toc.yml",
           "*.md"
-        ],
-        "exclude": [
-          "obj/**",
-          "_site/**"
         ]
       }
     ],
@@ -40,10 +33,6 @@
       {
         "files": [
           "images/**"
-        ],
-        "exclude": [
-          "obj/**",
-          "_site/**"
         ]
       }
     ],
@@ -59,20 +48,27 @@
       }
     ],
     "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "Firma MVC Core",
+      "_appFooter": "&copy; FER-FSRE 2020"
+    },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
-      "staticdoc"
+      "default"
     ],
     "postProcessors": [],
-    "noLangKeyword": false
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
   },
   "pdf": {
     "content": [
       {
         "files": [
-          "api/**.yml",
-          "api-vb/**.yml"
+          "api/**.yml"
         ],
         "exclude": [
           "**/toc.yml",

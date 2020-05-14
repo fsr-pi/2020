@@ -1,7 +1,7 @@
 ﻿@model ArtikliViewModel
 
 @{
-    ViewBag.Title += "Artikli";
+    ViewBag.Title = "Artikli";
 }
 
 <h2>Popis artikala</h2>
@@ -24,7 +24,7 @@
                     <th>
                         @if (sortable[i - 1])
                         {
-                            <a asp-route-sort="@i" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == i ? Model.PagingInfo.Ascending? false : true : true)">
+                            <a asp-route-sort="@i" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
                                 @nazivi[i - 1]
                             </a>
                         }

@@ -27,8 +27,7 @@ namespace Firma.Mvc.Controllers
 
       int pagesize = appData.PageSize;
 
-      var query = ctx.ViewDokumentInfo.AsNoTracking()
-                              .FromSql(Constants.SqlViewDokumenti);
+      var query = ctx.ViewDokumentInfo.AsQueryable();
 
       DokumentFilter df = new DokumentFilter();
       if (!string.IsNullOrWhiteSpace(filter))
@@ -148,11 +147,10 @@ namespace Firma.Mvc.Controllers
         }
         if (dokument.IdPrethDokumenta.HasValue)
         {
-          dokument.NazPrethodnogDokumenta = ctx.ViewDokumentInfo
-                                           .FromSql(Constants.SqlViewDokumenti)
-                                           .Where(d => d.IdDokumenta == dokument.IdPrethDokumenta)
-                                           .Select(d => d.IdDokumenta + " " + d.NazPartnera + " " + d.IznosDokumenta)
-                                           .FirstOrDefault();
+          dokument.NazPrethodnogDokumenta = ctx.ViewDokumentInfo                                          
+                                               .Where(d => d.IdDokumenta == dokument.IdPrethDokumenta)
+                                               .Select(d => d.IdDokumenta + " " + d.NazPartnera + " " + d.IznosDokumenta)
+                                               .FirstOrDefault();
         }
         //učitavanje stavki
         var stavke = ctx.Stavka
@@ -389,10 +387,7 @@ namespace Firma.Mvc.Controllers
 
     private void SetPreviousAndNext(int position, string filter, int sort, bool ascending)
     {
-      var query = ctx.ViewDokumentInfo
-                     .FromSql(Constants.SqlViewDokumenti)
-                     .AsNoTracking();
-
+      var query = ctx.ViewDokumentInfo.AsQueryable();                    
 
       DokumentFilter df = new DokumentFilter();
       if (!string.IsNullOrWhiteSpace(filter))

@@ -3,8 +3,8 @@
     $(this).select();
   });
 
-  $('.pagebox').bind('keyup', function (event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
+  $('.pagebox').keyup(function (event) {
+    var keycode = event.which;
     var pageBox = $(this);
     if (keycode == 13) {      
       if (validRange(pageBox.val(), pageBox.data("min"), pageBox.data("max"))) {

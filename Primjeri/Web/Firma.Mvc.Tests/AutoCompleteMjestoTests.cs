@@ -26,7 +26,7 @@ namespace Firma.Mvc.Tests
 
       var appSection = Configuration.GetSection("AppSettings");
 
-      string connectionString = appSection.GetValue<string>("ConnectionString");
+      string connectionString = Configuration.GetConnectionString("Firma");
       connectionString = connectionString.Replace("sifra", Configuration["FirmaSqlPassword"]);
 
       var dbContextBuilder = new DbContextOptionsBuilder<FirmaContext>()

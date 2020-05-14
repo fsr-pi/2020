@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 using System;
@@ -15,7 +15,7 @@ namespace Firma.Mvc
       try
       {
         logger.Debug("init main");
-        BuildWebHost(args).Run();
+        CreateHostBuilder(args).Build().Run();
       }
       catch (Exception ex)
       {
@@ -30,14 +30,12 @@ namespace Firma.Mvc
       }
     }
 
-    public static IWebHost BuildWebHost(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>()
-            .ConfigureLogging((hostingContext, logging) =>
-            {
-              logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-            })
-            .UseNLog()
-            .Build();
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+           Host.CreateDefaultBuilder(args)
+               .ConfigureWebHostDefaults(webBuilder =>
+               {
+                 webBuilder.UseStartup<Startup>();
+               })
+               .UseNLog();
   }
 }

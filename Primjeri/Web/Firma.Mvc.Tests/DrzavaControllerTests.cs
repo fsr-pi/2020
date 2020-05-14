@@ -62,7 +62,7 @@ namespace Firma.Mvc.Tests
                                     It.IsAny<EventId>(),
                                     It.IsAny<object>(),
                                     It.IsAny<Exception>(),
-                                    It.IsAny<Func<object, Exception, string>>())
+                                    (Func<object, Exception, string>)It.IsAny<object>())
                                  , Times.Once());
       }
     }

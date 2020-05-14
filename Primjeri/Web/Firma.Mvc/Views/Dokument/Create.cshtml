@@ -1,6 +1,6 @@
 ﻿@model DokumentViewModel
 @{
-    ViewBag.Title += "Unos novog dokumenta";
+    ViewBag.Title = "Unos novog dokumenta";
 }
 
 <h2>Unos novog dokumenta</h2>
@@ -41,7 +41,7 @@
             </div>
             <label asp-for="IdPartnera" class="col-sm-1 col-form-label"></label>
             <div class="col-sm-1">
-                <input asp-for="IdPartnera" readonly="readonly" class="form-control" data-autocomplete-result-for="partner" />
+                <input asp-for="IdPartnera" readonly="readonly" class="form-control" data-autocomplete-placeholder="partner" />
             </div>
             <div class="col-sm-3">
                 <input class="form-control" data-autocomplete="partner" asp-for="@Model.NazPartnera" />
@@ -51,7 +51,7 @@
         <div class="form-group row">          
             <label asp-for="IdPrethDokumenta" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-1">
-                <input asp-for="IdPrethDokumenta" readonly="readonly" class="form-control" data-autocomplete-result-for="dokument" />
+                <input asp-for="IdPrethDokumenta" readonly="readonly" class="form-control" data-autocomplete-placeholder="dokument" />
             </div>
             <div class="col-sm-3">
                 <input class="form-control" data-autocomplete="dokument" value="@Model.IdPrethDokumenta" />

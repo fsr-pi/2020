@@ -1,7 +1,7 @@
 ﻿@model PartnerViewModel
 
 @{
-    ViewBag.Title += "Ažuriranje partnera";
+    ViewBag.Title = "Ažuriranje partnera";
 }
 
 <form asp-action="Edit"
@@ -46,9 +46,9 @@
         <label asp-for="IdMjestaPartnera"></label>
         <div><span asp-validation-for="IdMjestaPartnera" class="text-danger"></span></div>
         <input class="form-control" data-autocomplete="mjesto"
-               data-autocomplete-result="mjestopartnera"
+               data-autocomplete-placeholder-name="mjestopartnera"
                value="@Model.NazMjestaPartnera" />
-        <input type="hidden" asp-for="IdMjestaPartnera" data-autocomplete-result-for="mjestopartnera" />
+        <input type="hidden" asp-for="IdMjestaPartnera" data-autocomplete-placeholder="mjestopartnera" />
     </div>
     <div class="form-group">
         <label asp-for="AdrIsporuke"></label>
@@ -59,9 +59,9 @@
         <label asp-for="IdMjestaIsporuke"></label>
         <div><span asp-validation-for="IdMjestaIsporuke" class="text-danger"></span></div>
         <input class="form-control" data-autocomplete="mjesto"
-               data-autocomplete-result="mjestoisporuke"
+               data-autocomplete-placeholder-name="mjestoisporuke"
                value="@Model.NazMjestaIsporuke" />
-        <input type="hidden" asp-for="IdMjestaIsporuke" data-autocomplete-result-for="mjestoisporuke" />
+        <input type="hidden" asp-for="IdMjestaIsporuke" data-autocomplete-placeholder="mjestoisporuke" />
     </div>
 
     <div class="text-center">

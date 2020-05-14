@@ -24,8 +24,7 @@ namespace Firma.Mvc.Controllers.AutoComplete
         [HttpGet]      
         public IEnumerable<IdLabel> Get(string term)
         {                       
-            var query = ctx.ViewDokumentInfo                            
-                            .FromSql(Constants.SqlViewDokumenti)                            
+            var query = ctx.ViewDokumentInfo                                                                                 
                             .Select(p => new IdLabel
                             {
                                 Id = p.IdDokumenta,

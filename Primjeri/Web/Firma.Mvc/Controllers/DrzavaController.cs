@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Firma.Mvc.Controllers
@@ -17,7 +17,7 @@ namespace Firma.Mvc.Controllers
   {
     private readonly FirmaContext ctx;
     private readonly AppSettings appData;
-    private readonly ILogger logger;
+    private readonly ILogger<DrzavaController> logger;
 
     public DrzavaController(FirmaContext ctx, IOptionsSnapshot<AppSettings> options, ILogger<DrzavaController> logger)
     {
@@ -114,7 +114,7 @@ namespace Firma.Mvc.Controllers
     [ValidateAntiForgeryToken]
     public IActionResult Create(Drzava drzava)
     {
-      logger.LogTrace(JsonConvert.SerializeObject(drzava));
+      logger.LogTrace(JsonSerializer.Serialize(drzava));
       if (ModelState.IsValid)
       {
         try

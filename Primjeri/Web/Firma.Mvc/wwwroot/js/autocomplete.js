@@ -1,48 +1,38 @@
 ﻿$(function () {
-    //$(".datum").datepicker({
-    //    // dateFormat: "dd.mm.yy"            
-    //});
+  //$(".datum").datepicker({
+  //    // dateFormat: "dd.mm.yy"            
+  //});
 
-    $("[data-autocomplete]").each(function (index, element) {
-        var url = $(element).data('autocomplete');
-        var resultplaceholder = $(element).data('autocomplete-result');
-        if (resultplaceholder === undefined)
-            resultplaceholder = url;
-        $(element).blur(function () {
-            if ($(element).val().length === 0) {
-                $("[data-autocomplete-result-for='" + resultplaceholder + "']").val('');
-            }
-        });
+  $("[data-autocomplete]").each(function (index, element) {
+    var url = $(element).data('autocomplete');
+    var resultplaceholder = $(element).data('autocomplete-placeholder-name');
+    if (resultplaceholder === undefined)
+      resultplaceholder = url;
 
-        $(element).autocomplete({
-            source: "/autocomplete/" + url,
-            autoFocus: true,
-            minLength: 1,
-            select: function (event, ui) {
-                $(element).val(ui.item.label);               
-                $("[data-autocomplete-result-for='" + resultplaceholder + "']").val(ui.item.id);                
-            }
-        });
+    $(element).change(function () {
+      var dest = $("[data-autocomplete-placeholder='" + resultplaceholder + "']");
+      var text = $(element).val();
+      if (text.length === 0 || text !== $(dest).data('selected-label')) {
+        $(dest).val('');
+      }
     });
 
-    $("[data-autocomplete-artikl]").each(function (index, element) {
-        var url = $(element).data('autocomplete-artikl');
-        $(element).blur(function () {
-            if ($(element).val().length === 0) {
-                $("[data-autocomplete-artikl-id='" + url + "']").val('');
-                $("[data-autocomplete-artikl-cijena='" + url + "']").val('');                
-            }
-        });
+    $(element).autocomplete({
+      source: "/autocomplete/" + url,
+      autoFocus: true,
+      minLength: 1,
+      select: function (event, ui) {
+        $(element).val(ui.item.label);
+        var dest = $("[data-autocomplete-placeholder='" + resultplaceholder + "']");
+        $(dest).val(ui.item.id);
+        $(dest).data('selected-label', ui.item.label);
 
-        $(element).autocomplete({
-            source: "/autocomplete/" + url,
-            autoFocus: true,
-            minLength: 1,
-            select: function (event, ui) {               
-                $(element).val(ui.item.label);
-                $("[data-autocomplete-id='" + url + "']").val(ui.item.id);
-                $("[data-autocomplete-cijena='" + url + "']").val(ui.item.cijena);                
-            }
-        });
+        //za artikle...
+        var dest_cijena = $("[data-autocomplete-placeholder-cijena='" + resultplaceholder + "']");
+        if (dest_cijena !== undefined) {
+          $(dest_cijena).val(ui.item.cijena);
+        }
+      }
     });
+  });
 });

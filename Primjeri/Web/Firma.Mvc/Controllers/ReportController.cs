@@ -9,7 +9,7 @@ using PdfRpt.Core.Helper;
 using PdfRpt.FluentInterface;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -243,7 +243,7 @@ namespace Firma.Mvc.Controllers
     public async Task<IActionResult> Dokumenti()
     {
       int n = 10;
-      var param = new SqlParameter("N", n);
+      var param = new SqlParameter("N", n); //SQL Parameter iz Microsoft.Data.SqlClient, a ne iz System.Data.SqlClient
       string naslov = $"{n} najvećih kupnji";
       var stavke = await ctx.StavkaDenorm                            
                             .FromSqlRaw("SELECT * FROM fn_NajveceKupnje(@N)", param)

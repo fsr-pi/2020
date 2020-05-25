@@ -3,11 +3,7 @@
     var tr = $(this).parents("tr");
     tr.remove();
 
-    //očisti staru poruku da je npr. dokument uspješno snimljen
-    $("#tempmessage").siblings().remove();
-    $("#tempmessage").removeClass("alert-success");
-    $("#tempmessage").removeClass("alert-danger");
-    $("#tempmessage").html('');
+    clearOldMessage();
 });
 
 $(function () {  

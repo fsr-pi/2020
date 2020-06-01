@@ -1,14 +1,9 @@
 ﻿using Firma.Mvc.Controllers.AutoComplete;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Hosting;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;

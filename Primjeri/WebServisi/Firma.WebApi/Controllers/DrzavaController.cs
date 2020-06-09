@@ -49,7 +49,7 @@ namespace Firma.WebApi.Controllers
       this.mapper = mapper;
     }
 
-    // GET: api/drzava
+    // GET: api/drzava/sve
     /// <summary>
     /// Postupak za dohvat svih država. 
     /// </summary>
